@@ -20,6 +20,39 @@
     </div>
   </div>
   </div>
+  <div class="card">
+  <p class="tagline" id="tagline">Success is built one focused session at a time.</p>
+
+  <div class="days" id="dayTabs"></div>
+
+  <label class="subject-row">Subject</label>
+  <input type="text" id="subject" placeholder="e.g. Data Structures">
+
+  <div class="row">
+    <div class="grp">
+      <label>Start Time</label>
+      <input type="time" id="startTime" value="10:00">
+    </div>
+    <div class="grp">
+      <label>End Time</label>
+      <input type="time" id="endTime" value="11:00">
+    </div>
+    <button class="gen-btn" id="genBtn">Generate Time Slot</button>
+  </div>
+
+  <div class="slot-display empty" id="slotDisplay">No time slot generated yet</div>
+
+  <label class="field-label">Notes</label>
+  <textarea id="notes" placeholder="e.g. Revise Trees & Graphs"></textarea>
+
+  <button class="add-btn" id="addBtn">+ Add to Timetable</button>
+
+  <div class="section-title"><span class="badge" id="countBadge">0</span> Your Timetable</div>
+  <div id="list"></div>
+
+  <button class="clear-btn" id="clearBtn">🗑 Clear All</button>
+  <button class="download-btn" id="downloadBtn">📄 Download Weekly Timetable</button>
+</div>
   
    <!----- FOOTER ----->
 
@@ -27,7 +60,7 @@
   <div class="footer-main">
     <div class="footer-col">
       <h4>Site Map</h4>
-       <a href="#">Home</a>
+       <a href="index.html">Home</a>
       <a href="#">About</a>
       <a href="#">Contact</a>
       <a href="#">Privacy Policy</a>
@@ -43,5 +76,6 @@
   <div class="footer-bottom">Copyright &copy; 2026, Personalized Study Planner. All Rights Reserved.</div>
 </div>
   </div>
+<script src="script.js"></script>
 </body>
 </html>

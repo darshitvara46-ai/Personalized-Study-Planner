@@ -10,34 +10,32 @@ body .main-container{
   box-sizing: border-box;
 }
 .app-header{
-  width:95%;
-  max-width:1400px;
+  width:100%;
+  max-width:1400rem;
   position:relative;
   display:flex;
   align-items:center;
   flex-wrap:wrap;
   row-gap:10px;
-  min-height: 64px;
+  min-height: 3.5rem;
   margin-left:auto;
   background:linear-gradient(120deg,#1f2f4d,#2f4d7a 55%,#3f6bab);
-  border-radius:16px;
+  border-radius:1rem;
   overflow:hidden;
   box-shadow:0 10px 30px -12px rgba(31,47,77,0.5);
-  margin-right:auto;
-  margin-bottom: 18px;
-  padding: 16px;
+  padding: 1.5rem 1.25rem;
 }
 .app-header .header-left{
   position:relative;
   z-index:2;
   display:flex;
   align-items:center;
-  gap:16px;
+  gap:1.75rem;
   width: 100%;
 }
 .app-header .logo-badge{
-  width:95px !important;
-  height:95px !important;
+  width:110px !important;
+  height:110px !important;
   min-width:38px;
   border-radius:18px;
   background:transparent !important;
@@ -49,8 +47,8 @@ body .main-container{
   overflow: hidden;
 }
 .app-header .logo-badge img{
-  width: 165px !important;
-  height: 165px !important;
+  width: 200px !important;
+  height: 200px !important;
   object-fit: contain;
 }
 .app-header .header-text {
@@ -58,7 +56,8 @@ body .main-container{
   flex-direction: column;
   align-items: flex-start;
   line-height: 1.25;
-  min-width: 0;
+  min-width: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 .app-header .brand{
   font-size:clamp(1.2rem, 3vw, 2.2rem);
@@ -81,9 +80,10 @@ body .main-container{
   position:relative;
   z-index:2;
   display:flex;
-  gap:16px;
+  gap:1.5rem;
   padding-left:22px;
   padding-right:22px;
+  margin-top: 0.625rem;
 }
 .app-header .nav-links a{
   color:#e6dcc0;
@@ -101,8 +101,8 @@ body .main-container{
  
 /* ===== Footer ===== */
 .app-footer{
-  width:95%;
-  max-width:1400px;
+  width:100%;
+  max-width:1400rem;
   margin-top:18px;
   background:#fbf7ec;
   border:1px solid #e6d9b8;
