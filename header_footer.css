@@ -34,8 +34,8 @@ body .main-container{
   width: 100%;
 }
 .app-header .logo-badge{
-  width:110px !important;
-  height:110px !important;
+  width:140px !important;
+  height:140px !important;
   min-width:38px;
   border-radius:18px;
   background:transparent !important;
@@ -47,8 +47,8 @@ body .main-container{
   overflow: hidden;
 }
 .app-header .logo-badge img{
-  width: 200px !important;
-  height: 200px !important;
+  width: 240px !important;
+  height: 240px !important;
   object-fit: contain;
 }
 .app-header .header-text {

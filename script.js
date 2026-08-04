@@ -1,9 +1,6 @@
-// ==========================================
-// 1. DYNAMIC RUNTIME LAYOUT & REPAIR ENGINE
-// ==========================================
 const styleOverride = document.createElement('style');
 styleOverride.textContent = `
-  /* Constrain the massive 1400rem scale to normal desktop monitors */
+  
   html, body {
     width: 100% !important;
     max-width: 100vw !important;
@@ -11,9 +8,34 @@ styleOverride.textContent = `
     padding: 0 !important;
     overflow-x: hidden !important;
     background-color: #f7f5f0 !important;
+    align-item: center !important;
+  }
+  
+    /* header navigation row styling */
+  .header-nav-row {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    gap: 4rem !important;
+    margin-top: 1.75rem !important;
+    box-sizing: border-box !important;
   }
 
-  /* Center everything and align to header/footer bounds */
+  .header-nav-row a {
+    color: #e6dcc0 !important;
+    text-decoration: none !important;
+    font-size: 1.55rem !important;
+    font-weight: 00 !important;
+    letter-spacing: 1px !important;
+    transition: color 0.15s ease !important;
+    cursor: pointer !important;
+  }
+
+  .header-nav-row a:hover, .header-nav-row a.active {
+    color: #ffffff !important;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.4) !important;
+  }
+
   .container {
     width: 90% !important;
     max-width: 1100px !important;
@@ -21,23 +43,37 @@ styleOverride.textContent = `
     box-sizing: border-box !important;
   }
 
-  .app-header, .card, .app-footer {
-    max-width: 100% !important;
-    width: 100% !important;
+  .card, .app-footer {
+    max-width: 1200px !important;
+    width: 90% !important;
     box-sizing: border-box !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
-  }
-
-  /* Stabilize the card internals and inner margins */
-  .card {
-    margin-top: 1.5rem !important;
-    margin-bottom: 1.5rem !important;
+    margin: 2rem auto !important; 
     padding: 2.5rem !important;
     height: auto !important;
   }
 
-  /* Correct alignment shifts for form elements */
+  .app-header {
+    margin-top: 2rem !important;
+    padding: 1.5rem !important;
+    width: 110% !important;
+    max-width: 1200px !important;
+    box-sizing: border-box !important;
+    margin-left:-50px !important;
+    margin-right: auto !important;
+  }
+
+  .card {
+    max-width: 1200px !important;       
+    margin: 2rem auto !important;    
+    padding: 2.5rem !important;
+    box-sizing: border-box !important;
+    height: auto !important;
+    background: #ffffff !important;
+    box-shadow: 0 15px 35px rgba(31, 47, 77, 0.1) !important;
+  }
+
   .subject-row, label.field-label, .row label {
     margin-left: 0 !important;
     margin-top: 1.5rem !important;
@@ -52,7 +88,6 @@ styleOverride.textContent = `
     display: block !important;
   }
 
-  /* Re-align time row container from absolute positioning shifts */
   .row {
     margin-left: 0 !important;
     width: 100% !important;
@@ -78,13 +113,13 @@ styleOverride.textContent = `
     box-sizing: border-box !important;
   }
 
-  /* Bring Generate button back to inline desktop layout flow with deep purple styles */
   .gen-btn {
     position: static !important;
-    display: inline-block !important;
+    display:block !important;
+    width:100% !important;
     height: 50px !important;
     line-height: normal !important;
-    margin: 0 !important;
+    margin: 1.5rem 0 0 0 !important;
     padding: 0.5rem 1.5rem !important;
     box-sizing: border-box !important;
     background: var(--purple-500, #7c3fae) !important;
@@ -100,16 +135,17 @@ styleOverride.textContent = `
     background-color: var(--purple-700, #5b21b6) !important;
   }
 
-  /* Fix height and visibility thresholds on time slot display */
   .slot-display, .slot-display.empty {
     width: 100% !important;
     margin-left: 0 !important;
     margin-top: 1.5rem !important;
     height: auto !important;
-    padding: 0.75rem 1rem !important;
+    padding: 1rem 1.25rem !important;
+    font-size: 1.85rem !important;
+    font-weight: 900 !important;
+    box-sizing: border-box !important;
   }
 
-  /* Reset layout constraints and color the Add button a rich, vibrant purple */
   .add-btn {
     width: 100% !important;
     margin-left: 0 !important;
@@ -135,7 +171,6 @@ styleOverride.textContent = `
   }
   .add-btn:active { transform: translateY(0) !important; }
 
-  /* Clear All Button configured with an explicit purple identity accent */
   .clear-btn {
     margin-top: 2rem !important;
     height: auto !important;
@@ -155,7 +190,6 @@ styleOverride.textContent = `
   }
   .clear-btn:hover { background-color: var(--purple-300, #e9d5ff) !important; }
 
-  /* Download Button configured with a full solid theme color */
   .download-btn {
     width: 100% !important;
     margin-left: 0 !important;
@@ -173,7 +207,6 @@ styleOverride.textContent = `
   }
   .download-btn:hover { background-color: var(--purple-900, #4c1d95) !important; }
 
-  /* Support clean day list flex row rendering */
   .days {
     display: flex !important;
     flex-wrap: nowrap !important;
@@ -202,9 +235,7 @@ styleOverride.textContent = `
 `;
 document.head.appendChild(styleOverride);
 
-// ==========================================
-// 2. INTERACTIVE TIMETABLE DATA APPLICATION
-// ==========================================
+
 let scheduleEntries = [];
 let selectedDay = 'Mon';
 let currentGeneratedSlot = "";
@@ -222,7 +253,7 @@ const listContainer = document.getElementById('list');
 const clearBtn = document.getElementById('clearBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 
-// Automatically render missing weekdays elements
+
 const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 if (dayTabsContainer) {
   dayTabsContainer.innerHTML = daysOfWeek.map((day, idx) => {
@@ -239,14 +270,14 @@ dayButtons.forEach(button => {
   });
 });
 
-// Configure link referencing home behavior in the footer block
+
 document.querySelectorAll('.footer-col a').forEach(link => {
   if (link.textContent.trim() === 'Home') {
     link.setAttribute('href', 'index.html');
   }
 });
 
-// Helper: Convert 24-hour format ("14:00") to clean 12-hour AM/PM ("02:00 PM")
+
 function format12Hour(timeString) {
   if (!timeString) return '';
   const [hours, minutes] = timeString.split(':');
@@ -255,7 +286,7 @@ function format12Hour(timeString) {
   return `${String(formattedHours).padStart(2, '0')}:${minutes} ${ampm}`;
 }
 
-// Generate Time Slot Action Panel Controller
+
 if (genBtn) {
   genBtn.addEventListener('click', () => {
     const startTime = startTimeInput ? startTimeInput.value : '';
@@ -274,9 +305,49 @@ if (genBtn) {
   });
 }
 
-// Add Item Session Action
+
 if (addBtn) {
   addBtn.addEventListener('click', () => {
+    const subject = subjectInput ? subjectInput.value.trim() : '';
+    const notes = notesTextarea ? notesTextarea.value.trim() : '';
+
+    if (!subject) {
+      alert('Please fill out the Subject field.');
+      return;
+    }
+
+    if (!currentGeneratedSlot) {
+      alert('Please click "Generate Time Slot" first.');
+      return;
+    }
+
+    const isDuplicate = scheduleEntries.some(entry => {
+      return entry.day === selectedDay && entry.timeSlot === currentGeneratedSlot;
+    });
+
+    if (isDuplicate){
+      alert(`Error: A session is already scheduled on ${selectedDay} at ${currentGeneratedSlot}!`);
+      return;
+    }
+
+    const newEntry = {
+      id: Date.now(),
+      day: selectedDay,
+      subject: subject,
+      timeSlot: currentGeneratedSlot,
+      notes: notes
+    };
+
+    scheduleEntries.push(newEntry);
+    renderEntries();
+    resetFormInputs();
+  });
+}
+
+
+if (addBtn) {
+  addBtn.addEventListener('click', () => {
+    // Collect cleaned inputs directly from index.html values
     const subject = subjectInput ? subjectInput.value.trim() : '';
     const notes = notesTextarea ? notesTextarea.value.trim() : '';
 
@@ -298,8 +369,95 @@ if (addBtn) {
       notes: notes
     };
 
+  
     scheduleEntries.push(newEntry);
     renderEntries();
     resetFormInputs();
+  });
+}
+
+function renderEntries() {
+  if (!listContainer) return;
+  listContainer.innerHTML = '';
+  
+  if (countBadge) {
+    countBadge.textContent = scheduleEntries.length;
+  }
+
+  if (scheduleEntries.length === 0) {
+    listContainer.innerHTML = '<div class="empty-state" style="text-align:center; padding:1rem; color:#b5a67e;">No sessions added yet.</div>';
+    return;
+  }
+
+  const grouped = scheduleEntries.reduce((acc, item) => {
+    if (!acc[item.day]) acc[item.day] = [];
+    acc[item.day].push(item);
+    return acc;
+  }, {});
+
+  for (const day in grouped) {
+    const groupLabel = document.createElement('div');
+    groupLabel.className = 'day-group-label';
+    groupLabel.textContent = day;
+    listContainer.appendChild(groupLabel);
+
+    grouped[day].forEach(entry => {
+      const entryDiv = document.createElement('div');
+      entryDiv.className = 'entry';
+      entryDiv.innerHTML = `
+        <div class="info">
+          <b>${entry.subject}</b>
+          <span>${entry.timeSlot}</span>
+          ${entry.notes ? `<span class="notes">${entry.notes}</span>` : ''}
+        </div>
+        <button data-id="${entry.id}">✕</button>
+      `;
+      listContainer.appendChild(entryDiv);
+    });
+  }
+}
+
+
+if (listContainer) {
+  listContainer.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
+      const idToDelete = parseInt(e.target.getAttribute('data-id'));
+      scheduleEntries = scheduleEntries.filter(entry => entry.id !== idToDelete);
+      renderEntries();
+    }
+  });
+}
+
+function resetFormInputs() {
+  if (subjectInput) subjectInput.value = '';
+  if (notesTextarea) notesTextarea.value = '';
+  currentGeneratedSlot = "";
+  if (slotDisplay) {
+    slotDisplay.classList.add('empty');
+    slotDisplay.textContent = "No time slot generated yet";
+  }
+}
+
+if (clearBtn) {
+  clearBtn.addEventListener('click', () => {
+    scheduleEntries = []; 
+    renderEntries();      
+    resetFormInputs();    
+  });
+}
+
+if (downloadBtn) {
+  downloadBtn.addEventListener('click', () => {
+    if (scheduleEntries.length === 0) {
+      alert('Your timetable is empty.');
+      return;
+    }
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(scheduleEntries, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", "weekly_timetable.json");
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
   });
 }
