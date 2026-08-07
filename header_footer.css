@@ -1,4 +1,11 @@
-/* ===== Header ===== */
+body{
+  background-color: #f4f6f9;
+  background-image: url('background_2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 body .main-container{
   margin: 0;
   display: flex;

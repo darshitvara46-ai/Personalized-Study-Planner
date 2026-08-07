@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Personalized Study Planner</title>
+  
+  <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+  <div class="signup-card">
+    <h1 class="signup-title">Sign Up</h1>
+    <div class="marquee-container">
+    <p class="signup-subtitle">Join thousands of students staying ahead with Personalized study planner.</p>
+    </div>
+
+    <form class="signup-form" id="signupForm">
+    
+      <div class="input-group">
+        <label for="firstName" class="input-label">First name</label>
+        <input type="text" id="firstName" class="form-input" placeholder="Enter first name" required>
+      </div>
+
+      
+      <div class="input-group">
+        <label for="lastName" class="input-label">Last name</label>
+        <input type="text" id="lastName" class="form-input" placeholder="Enter last name" required>
+      </div>
+
+      
+      <div class="input-group">
+        <label for="email" class="input-label">Email</label>
+        <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+      </div>
+
+      
+      <div class="input-group">
+        <label for="password" class="input-label">Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="password" class="form-input" placeholder="Enter password" required>
+          <button type="button" class="toggle-password" id="togglePasswordBtn" aria-label="Toggle password visibility">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      
+      <div class="input-group">
+        <label for="confirmPassword" class="input-label">Confirm Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="confirmPassword" class="form-input" placeholder="Enter confirm password" required>
+          <button type="button" class="toggle-password" id="toggleConfirmPasswordBtn" aria-label="Toggle password visibility">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      
+      <button type="submit" class="submit-btn">Continue</button>
+    </form>
+
+    <div class="divider">or sign up with</div>
+
+    
+    <div class="social-login-row">
+      <a href="#" class="social-btn google-btn" aria-label="Sign up with Google">
+        <img src="google.png" alt="Google Logo" style="width: 24px; height: 24px;">
+      </a>
+
+      <a href="#" class="social-btn apple-btn" aria-label="Sign up with Apple">
+        <img src="apple.png" alt="Apple Logo" style="width: 24px; height: 24px;">
+      </a>
+    </div>
+
+
+    <div class="signup-footer">
+      Already have an account? <a href="login.html" class="login-link">Sign in</a>
+    </div>
+  </div>
+
+  
+  <script>
+    
+    function setupPasswordToggle(inputId, buttonId) {
+      const input = document.getElementById(inputId);
+      const button = document.getElementById(buttonId);
+      if (input && button) {
+        button.addEventListener('click', () => {
+          const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+          input.setAttribute('type', type);
+        });
+      }
+    }
+
+    setupPasswordToggle('password', 'togglePasswordBtn');
+    setupPasswordToggle('confirmPassword', 'toggleConfirmPasswordBtn');
+
+    
+    document.getElementById('signupForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      
+      if (password !== confirmPassword) {
+        alert("Error: Passwords do not match! Please verify your inputs.");
+        return;
+      }
+
+      
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

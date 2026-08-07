@@ -71,7 +71,7 @@ styleOverride.textContent = `
     box-sizing: border-box !important;
     height: auto !important;
     background: #ffffff !important;
-    box-shadow: 0 15px 35px rgba(31, 47, 77, 0.1) !important;
+    box-shadow: 0 15px 35px rgba(44, 82, 157, 0.15) !important;
   }
 
   .subject-row, label.field-label, .row label {
@@ -113,7 +113,7 @@ styleOverride.textContent = `
     box-sizing: border-box !important;
   }
 
-  .gen-btn {
+   .gen-btn {
     position: static !important;
     display:block !important;
     width:100% !important;
@@ -171,7 +171,7 @@ styleOverride.textContent = `
   }
   .add-btn:active { transform: translateY(0) !important; }
 
-  .clear-btn {
+   .clear-btn {
     margin-top: 2rem !important;
     height: auto !important;
     width: 100% !important;
@@ -190,7 +190,7 @@ styleOverride.textContent = `
   }
   .clear-btn:hover { background-color: var(--purple-300, #e9d5ff) !important; }
 
-  .download-btn {
+   .download-btn {
     width: 100% !important;
     margin-left: 0 !important;
     margin-top: 1.5rem !important;
@@ -206,6 +206,7 @@ styleOverride.textContent = `
     cursor: pointer !important;
   }
   .download-btn:hover { background-color: var(--purple-900, #4c1d95) !important; }
+
 
   .days {
     display: flex !important;
