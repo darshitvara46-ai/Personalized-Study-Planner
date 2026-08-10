@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-    <!-----  HEADER ----->
+    <!-----  header ----->
   <div class="app-header">
   <div class="header-left">
     <span class="logo-badge">
@@ -36,7 +36,7 @@
   <div class="days" id="dayTabs"></div>
 
   <label class="subject-row">Subject</label>
-  <input type="text" id="subject" placeholder="e.g. Data Structures">
+  <input type="text" id="subject" placeholder="E.g. Data Structures" required>
 
   <div class="row">
     <div class="grp">
@@ -47,15 +47,15 @@
       <label>End Time</label>
       <input type="time" id="endTime" value="11:00">
     </div>
-    <button class="gen-btn" id="genBtn">Generate Time Slot</button>
+    <button type="button" class="gen-btn" id="genBtn">Generate Time Slot</button>
   </div>
 
   <div class="slot-display empty" id="slotDisplay">No time slot generated yet</div>
 
   <label class="field-label">Notes</label>
-  <textarea id="notes" placeholder="e.g. Revise Trees & Graphs"></textarea>
+  <textarea id="notes" placeholder="E.g. Revise Trees & Graphs"></textarea>
 
-  <button class="add-btn" id="addBtn">+ Add to Timetable</button>
+  <button  type="submit" class="add-btn" id="addBtn">+ Add to Timetable</button>
 
   <div class="section-title"><span class="badge" id="countBadge">0</span> Your Timetable</div>
   <div id="list"></div>
@@ -64,7 +64,7 @@
   <button class="download-btn" id="downloadBtn">📄 Download Weekly Timetable</button>
 </div>
   
-   <!----- FOOTER ----->
+   <!----- footer ----->
 
   <div class="app-footer">
   <div class="footer-main">

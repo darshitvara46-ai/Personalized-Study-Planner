@@ -293,10 +293,7 @@ if (genBtn) {
     const startTime = startTimeInput ? startTimeInput.value : '';
     const endTime = endTimeInput ? endTimeInput.value : '';
 
-    if (!startTime || !endTime) {
-      alert('Please select both a Start Time and an End Time.');
-      return;
-    }
+
 
     if (slotDisplay) {
       slotDisplay.classList.remove('empty');
@@ -346,36 +343,7 @@ if (addBtn) {
 }
 
 
-if (addBtn) {
-  addBtn.addEventListener('click', () => {
-    // Collect cleaned inputs directly from index.html values
-    const subject = subjectInput ? subjectInput.value.trim() : '';
-    const notes = notesTextarea ? notesTextarea.value.trim() : '';
 
-    if (!subject) {
-      alert('Please fill out the Subject field.');
-      return;
-    }
-
-    if (!currentGeneratedSlot) {
-      alert('Please click "Generate Time Slot" first.');
-      return;
-    }
-
-    const newEntry = {
-      id: Date.now(),
-      day: selectedDay,
-      subject: subject,
-      timeSlot: currentGeneratedSlot,
-      notes: notes
-    };
-
-  
-    scheduleEntries.push(newEntry);
-    renderEntries();
-    resetFormInputs();
-  });
-}
 
 function renderEntries() {
   if (!listContainer) return;
