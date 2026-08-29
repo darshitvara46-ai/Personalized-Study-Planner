@@ -1,5 +1,6 @@
 const styleOverride = document.createElement('style');
 styleOverride.textContent = `
+
   
   html, body {
     width: 100% !important;
@@ -11,7 +12,7 @@ styleOverride.textContent = `
     align-item: center !important;
   }
   
-    /* header navigation row styling */
+  
   .header-nav-row {
     width: 100% !important;
     display: flex !important;
@@ -29,6 +30,7 @@ styleOverride.textContent = `
     letter-spacing: 1px !important;
     transition: color 0.15s ease !important;
     cursor: pointer !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
   }
 
   .header-nav-row a:hover, .header-nav-row a.active {
@@ -79,6 +81,7 @@ styleOverride.textContent = `
     margin-top: 1.5rem !important;
     margin-bottom: 0.5rem !important;
     display: block !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
 
   input[type="text"], textarea, .slot-display, .clear-btn {
@@ -86,6 +89,7 @@ styleOverride.textContent = `
     margin-left: 0 !important;
     box-sizing: border-box !important;
     display: block !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
 
   .row {
@@ -306,8 +310,14 @@ if (genBtn) {
 
 if (addBtn) {
   addBtn.addEventListener('click', () => {
+    
     const subject = subjectInput ? subjectInput.value.trim() : '';
     const notes = notesTextarea ? notesTextarea.value.trim() : '';
+
+    if (!/^[A-Za-z ]+$/.test(subject)) {
+    alert("Please enter a valid subject name.");
+    return;
+    }
 
     if (!subject) {
       alert('Please fill out the Subject field.');

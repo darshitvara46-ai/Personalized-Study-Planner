@@ -36,14 +36,14 @@
   <div class="days" id="dayTabs"></div>
 
   <label class="subject-row">Subject</label>
-  <input type="text" id="subject" placeholder="E.g. Data Structures" required>
+  <input type="text" id="subject" placeholder="E.g. Data Structures" pattern="[A-Za-z ]+" required>
 
   <div class="row">
     <div class="grp">
       <label>Start Time</label>
       <input type="time" id="startTime" value="10:00">
     </div>
-    <div class="grp">
+    <div class="grp"> 
       <label>End Time</label>
       <input type="time" id="endTime" value="11:00">
     </div>
@@ -60,8 +60,8 @@
   <div class="section-title"><span class="badge" id="countBadge">0</span> Your Timetable</div>
   <div id="list"></div>
 
-  <button class="clear-btn" id="clearBtn">🗑 Clear All</button>
-  <button class="download-btn" id="downloadBtn">📄 Download Weekly Timetable</button>
+  <button class="clear-btn" id="clearBtn"> Clear All</button>
+  <button class="download-btn" id="downloadBtn"> Download Weekly Timetable</button>
 </div>
   
    <!----- footer ----->
@@ -83,6 +83,7 @@
   <div class="footer-bottom">Copyright &copy; 2026, Personalized Study Planner. All Rights Reserved.</div>
 </div>
   </div>
-<script src="script.js"></script>
+<script src="script.js">
+</script>
 </body>
 </html>

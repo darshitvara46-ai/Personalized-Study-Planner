@@ -16,6 +16,7 @@
   margin:-0.75rem 0 1.375rem;
   letter-spacing:0.0125rem;
   margin-top: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 .days{
   display:flex;
