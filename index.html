@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personalized Study Planner</title>
+  <link rel="stylesheet" href="header_footer.css">
+  <link rel="stylesheet" href="card.css">
+</head>
+<body>
+  <div class="container">
+    <!----- header ----->
+    <div class="app-header">
+      <div class="header-left">
+        <span class="logo-badge">
+          <img src="logo.png" alt="Study Planner Logo" class="badge-logo-img" style="width: 38px; height: 38px; object-fit: cover;">
+        </span>
+        <div class="header-text">
+          <span class="brand">Personalized Study Planner</span>
+          <span class="subbrand">Plan smart · Study better</span>
+
+          <div class="header-nav-row">
+  <a href="index.html" class="active">Home</a>
+  <a href="#" id="navAbout">About</a>
+  <a href="#" id="navContact">Contact</a>
+  <a href="#" id="navForParents">For parents</a>
+  
+  <!-- Dynamic Auth Nav Items -->
+  <a href="login.html" id="navLogin">Log in</a>
+  <a href="signup.html" id="navSignup">Sign up</a>
+  
+  <!-- Displayed only when logged in -->
+  <span id="userGreeting" style="display: none; color: #fff; font-weight: 600; margin-left: 10px;">
+    Hi, <span id="userName">User</span> 
+    (<a href="#" id="logoutBtn" style="color: #ff6b6b; text-decoration: underline; margin-left: 5px;">Logout</a>)
+  </span>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="tagline" id="tagline">Success is built one focused session at a time.</p>
+
+    <div class="days" id="dayTabs"></div>
+
+    <label class="subject-row">Subject</label>
+    <input type="text" id="subject" placeholder="E.g. Data Structures" pattern="[A-Za-z ]+" required>
+
+    <div class="row">
+      <div class="grp">
+        <label>Start Time</label>
+        <input type="time" id="startTime" value="10:00">
+      </div>
+      <div class="grp"> 
+        <label>End Time</label>
+        <input type="time" id="endTime" value="11:00">
+      </div>
+      <button type="button" class="gen-btn" id="genBtn">Generate Time Slot</button>
+    </div>
+
+    <div class="slot-display empty" id="slotDisplay">No time slot generated yet</div>
+
+    <label class="field-label">Notes</label>
+    <textarea id="notes" placeholder="E.g. Revise Trees & Graphs"></textarea>
+
+    <button type="submit" class="add-btn" id="addBtn">+ Add to Timetable</button>
+
+    <div class="section-title"><span class="badge" id="countBadge">0</span> Your Timetable</div>
+    <div id="list"></div>
+
+    <button class="clear-btn" id="clearBtn"> Clear All</button>
+    <button class="download-btn" id="downloadBtn"> Download Weekly Timetable</button>
+  </div>
+
+  <!----- footer ----->
+  <div class="app-footer">
+    <div class="footer-main">
+      <div class="footer-col">
+        <h4>Site Map</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+      </div>
+      <div class="footer-col">
+        <h4>Project Info</h4>
+        <a href="#">Personalized-Study Planner</a>
+        <a href="#">Gujarat Technological University</a>
+        <a href="#">studyplanner123@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">Copyright &copy; 2026, Personalized Study Planner. All Rights Reserved.</div>
+  </div>
+
+  <!-- External Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabaseUrl = "https://mitobngigufknrijzhxq.supabase.co";
+  const supabaseKey = "sb_publishable_qxAqMx5EMNIAoNUzyNm_UQ_JXX3Gu6E";
+  const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+  async function checkUserSession() {
+    // Check current active session in Supabase
+    const { data: { session } } = await supabaseClient.auth.getSession();
+
+    const navLogin = document.getElementById("navLogin");
+    const navSignup = document.getElementById("navSignup");
+    const userGreeting = document.getElementById("userGreeting");
+    const userNameSpan = document.getElementById("userName");
+
+    if (session && session.user) {
+      // Extract username or display email
+      const email = session.user.email;
+      const displayName = email.split('@')[0]; // Takes everything before @
+
+      if (navLogin) navLogin.style.display = "none";
+      if (navSignup) navSignup.style.display = "none";
+
+      if (userNameSpan) userNameSpan.textContent = displayName;
+      if (userGreeting) userGreeting.style.display = "inline";
+    } else {
+      if (navLogin) navLogin.style.display = "inline";
+      if (navSignup) navSignup.style.display = "inline";
+      if (userGreeting) userGreeting.style.display = "none";
+    }
+  }
+
+  // Handle Logout
+  document.addEventListener("DOMContentLoaded", () => {
+    checkUserSession();
+
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        await supabaseClient.auth.signOut();
+        window.location.reload();
+      });
+    }
+  });
+</script>
+
+  <!-- App Scripts -->
+  <script src="script.js"></script>
+  <script src="sign.js"></script>
+</body>
+</html>
