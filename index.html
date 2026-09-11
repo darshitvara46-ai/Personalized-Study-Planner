@@ -103,8 +103,22 @@
   const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
   async function checkUserSession() {
-    // Check current active session in Supabase
     const { data: { session } } = await supabaseClient.auth.getSession();
+
+    // Get current page
+    const currentPage = window.location.pathname.split("/").pop();
+
+    // If user is NOT logged in and tries to open home page
+    if (!session && currentPage === "index.html") {
+        window.location.href = "login.html";
+        return;
+    }
+
+    // If user IS logged in and opens login page
+    if (session && currentPage === "login.html") {
+        window.location.href = "index.html";
+        return;
+    }
 
     const navLogin = document.getElementById("navLogin");
     const navSignup = document.getElementById("navSignup");
@@ -112,21 +126,31 @@
     const userNameSpan = document.getElementById("userName");
 
     if (session && session.user) {
-      // Extract username or display email
-      const email = session.user.email;
-      const displayName = email.split('@')[0]; // Takes everything before @
 
-      if (navLogin) navLogin.style.display = "none";
-      if (navSignup) navSignup.style.display = "none";
+        const email = session.user.email;
+        const displayName = email.split("@")[0];
 
-      if (userNameSpan) userNameSpan.textContent = displayName;
-      if (userGreeting) userGreeting.style.display = "inline";
+        if (navLogin) navLogin.style.display = "none";
+        if (navSignup) navSignup.style.display = "none";
+
+        if (userNameSpan) {
+            userNameSpan.textContent = displayName;
+        }
+
+        if (userGreeting) {
+            userGreeting.style.display = "inline";
+        }
+
     } else {
-      if (navLogin) navLogin.style.display = "inline";
-      if (navSignup) navSignup.style.display = "inline";
-      if (userGreeting) userGreeting.style.display = "none";
+
+        if (navLogin) navLogin.style.display = "inline";
+        if (navSignup) navSignup.style.display = "inline";
+
+        if (userGreeting) {
+            userGreeting.style.display = "none";
+        }
     }
-  }
+}
 
   // Handle Logout
   document.addEventListener("DOMContentLoaded", () => {
